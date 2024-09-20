@@ -1,0 +1,21 @@
+vector2 <- "v2062815" # canada unemployment, monthly 
+unemployment <- get_cansim_vector(vector2,
+                                  start_time = "2015-01-01")
+head(unemployment)
+class(unemployment$VALUE)
+plot(unemployment$VALUE)
+
+year.st <- year(unemployment$REF_DATE[1])
+month.st <- month(unemployment$REF_DATE[1])
+c(year.st, month.st)
+
+unemployment.ts <- ts(unemployment$VALUE,
+                      start = c(year.st, month.st),
+                      frequency = 12)
+class(unemployment.ts)
+unemployment.ts
+plot(unemployment.ts, main = 'Unemployment rates, Canada, monthly, sa.',
+                      ylab = 'Unemployment rate',
+                      xlab = 'year',
+                      col = "blue")
+
